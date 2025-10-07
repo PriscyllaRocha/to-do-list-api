@@ -24,11 +24,12 @@ src/main/java/com/seuprojeto/
 └── dto # Objetos de transferência de dados
 
 
-## Desenvolido por:
+## Desenvolvido por:
 
 Priscylla Rocha
 
 ## Licença:
 
-Este projeto é para fins acadêmicos e não possui licença específica. Sinta-se livre para usar como referência em estudos e projetos similares.
+Este é um projeto para fins acadêmicos.  
+Está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
 
