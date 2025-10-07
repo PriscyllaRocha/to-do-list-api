@@ -49,7 +49,6 @@ git clone https://github.com/PriscyllaRocha/to-do-list-api.git
 2. Configure o MySQL no arquivo application.properties:
 ```
 properties
-Copiar código
 spring.datasource.url=jdbc:mysql://localhost:3306/todolist
 spring.datasource.username=root
 spring.datasource.password=senha
