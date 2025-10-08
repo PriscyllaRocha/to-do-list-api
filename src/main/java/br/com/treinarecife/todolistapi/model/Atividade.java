@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 @Entity
 @Table(name = "atividade")
 public class Atividade {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,12 +31,20 @@ public class Atividade {
     @JoinColumn(name = "pessoa_id")
     private Pessoa responsavel;
 
+    @NotNull
+    private Integer duracaoEstimadaMin; 
+
+    @NotBlank
+    private String contexto; // Ex: "Em Casa", "No Escritório", "Online"
+
+    @NotNull
+    private Integer energiaNecessaria; // 1 a 5
+
     @PrePersist
     public void prePersist() {
         this.dataCriacao = OffsetDateTime.now();
     }
 
-    // getters e setters (inclua todos)
     public Long getId() {
         return id;
     }
@@ -94,5 +103,29 @@ public class Atividade {
 
     public void setResponsavel(Pessoa responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public Integer getDuracaoEstimadaMin() {
+        return duracaoEstimadaMin;
+    }
+
+    public void setDuracaoEstimadaMin(Integer duracaoEstimadaMin) {
+        this.duracaoEstimadaMin = duracaoEstimadaMin;
+    }
+
+    public String getContexto() {
+        return contexto;
+    }
+
+    public void setContexto(String contexto) {
+        this.contexto = contexto;
+    }
+
+    public Integer getEnergiaNecessaria() {
+        return energiaNecessaria;
+    }
+
+    public void setEnergiaNecessaria(Integer energiaNecessaria) {
+        this.energiaNecessaria = energiaNecessaria;
     }
 }
