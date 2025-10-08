@@ -13,6 +13,11 @@ public interface AtividadeRepository extends JpaRepository<Atividade, Long> {
 
     List<Atividade> findByStatus(Status status);
 
+    List<Atividade> findByContextoAndEnergiaNecessariaLessThanEqualOrderByDuracaoEstimadaMinAsc(
+            String contexto,
+            Integer energiaMaxima
+    );
+
     @Query("SELECT a FROM Atividade a WHERE a.responsavel.id = :pessoaId ORDER BY a.status.nome ASC")
     List<Atividade> findByResponsavelOrderByStatusName(Long pessoaId);
 

@@ -72,4 +72,12 @@ public class AtividadeController {
     public List<Map<String, Object>> rankingEncerradasNoPrazo() {
         return service.rankingEncerradasNoPrazo();
     }
+
+    @Operation(summary = "Sugere atividades com base no contexto atual e nível de energia do usuário")
+    @GetMapping("/sugeridas")
+    public List<Atividade> sugerirAtividades(
+        @RequestParam String contexto,
+        @RequestParam int minhaEnergia) {
+    return service.sugerirAtividades(contexto, minhaEnergia);
+}
 }
