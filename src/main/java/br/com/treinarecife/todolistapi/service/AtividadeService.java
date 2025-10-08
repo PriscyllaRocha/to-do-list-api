@@ -146,20 +146,33 @@ public class AtividadeService {
     }
 
     public List<Atividade> sugerirAtividades(String contexto, int minhaEnergia) {
-    // Buscar todas as atividades filtrando pelo contexto
-    List<Atividade> filtradasPorContexto = atividadeRepository.findAll().stream()
+        // Buscar todas as atividades filtrando pelo contexto
+        List<Atividade> filtradasPorContexto = atividadeRepository.findAll().stream()
             .filter(a -> a.getContexto() != null && a.getContexto().equalsIgnoreCase(contexto))
             .collect(Collectors.toList());
-
-    // Filtrar pelo nível de energia
-    List<Atividade> adequadasPorEnergia = filtradasPorContexto.stream()
+            
+            // Filtrar pelo nível de energia
+            List<Atividade> adequadasPorEnergia = filtradasPorContexto.stream()
             .filter(a -> a.getEnergiaNecessaria() <= minhaEnergia)
             .collect(Collectors.toList());
+            
+            // Ordenar pelo tempo de duração (do menor para o maior)
+            adequadasPorEnergia.sort(Comparator.comparingInt(Atividade::getDuracaoEstimadaMin));
+            
+            // Retornar apenas as 3 a 5 mais recomendadas (opcional)
+            return adequadasPorEnergia.stream().limit(5).collect(Collectors.toList());
+    }
 
-    // Ordenar pelo tempo de duração (do menor para o maior)
-    adequadasPorEnergia.sort(Comparator.comparingInt(Atividade::getDuracaoEstimadaMin));
-
-    // Retornar apenas as 3 a 5 mais recomendadas (opcional)
-    return adequadasPorEnergia.stream().limit(5).collect(Collectors.toList());
+    // Método para sugerir atividades otimizadas
+    public List<Atividade> sugerirAtividades(String contexto, int minhaEnergia, int limite) {
+        // Filtra pelo contexto e energia
+        List<Atividade> filtradas = atividadeRepository.findAll().stream()
+            .filter(a -> a.getContexto().equalsIgnoreCase(contexto))
+            .filter(a -> a.getEnergiaNecessaria() <= minhaEnergia)
+            .sorted(Comparator.comparingInt(Atividade::getDuracaoEstimadaMin)) 
+            .limit(limite) 
+            .collect(Collectors.toList());
+    return filtradas;
 }
+
 }

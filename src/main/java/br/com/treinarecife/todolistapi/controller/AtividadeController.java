@@ -79,5 +79,15 @@ public class AtividadeController {
         @RequestParam String contexto,
         @RequestParam int minhaEnergia) {
     return service.sugerirAtividades(contexto, minhaEnergia);
-}
+    }
+
+    @Operation(summary = "Sugere atividades com base no contexto, energia e duração estimada")
+    @GetMapping("/sugeridas")
+    public List<Atividade> sugerir(
+        @RequestParam String contexto,
+        @RequestParam int minhaEnergia,
+        @RequestParam(required = false, defaultValue = "5") int limite) {
+    return service.sugerirAtividades(contexto, minhaEnergia, limite);
+    }
+
 }
